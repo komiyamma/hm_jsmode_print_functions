@@ -10,7 +10,11 @@ js {
     let list = Object.keys(Function("return this")());
     for ( let e of list ) {
         
-        if (! e.includes("hideamru") && ! /^[a-z0-9_]+$/.test(e)) {
+        if (! e.includes("hideamru") &&
+            ! /^[a-z0-9_]+$/.test(e) &&
+            e != "EvalJs" &&
+            e != "encodeURI" &&
+            e != "decodeURI") {
             continue;
         }
         if (e == "e_obj") {
