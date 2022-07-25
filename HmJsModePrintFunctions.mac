@@ -1,0 +1,24 @@
+﻿/*
+ * This codes is licensed under CC0 1.0 Universal
+ */
+
+jsmode "WebView2", 1;
+
+js {
+    debuginfo(2);
+    let list = Object.keys(Function(`return this`)());
+    for ( let e of list ) {
+        if (! /^[a-z0-9_]+$/.test(e) ) {
+            continue;
+        }
+        if (e == "e_obj") {
+            continue;
+        }
+        eval("e_obj = " + e);
+        if (e_obj != null) {
+            if (e_obj.toString().includes("var ") || e_obj.toString().includes("return") || e_obj.toString().includes(";")) {
+                console.log(sprintf("%30s", e) + " ★ " + e_obj);
+            }
+        }
+    }
+}
