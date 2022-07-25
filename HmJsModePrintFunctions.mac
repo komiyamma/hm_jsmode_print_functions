@@ -26,7 +26,7 @@ js {
         }
         eval("e_obj = " + e);
         if (e_obj != null) {
-            e_str = e_obj.toString();
+            let e_str = e_obj.toString();
             if (e_str.includes("var ") || e_str.includes("return") || e_str.includes(";")) {
                 e_str = e_str.replace("\t", " ");
                 console.log(sprintf("%30s", e) + " ★ " + e_str);

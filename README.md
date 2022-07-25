@@ -129,7 +129,7 @@
                      winsysdir ★ function(){/*括弧を付けて呼んでください*/var m="winsysdir";eval(fs);return r;}
                  filehistcount ★ function(){/*括弧を付けて呼んでください*/var m="filehistcount";eval(fn);return r;}
                      overwrite ★ function(){/*括弧を付けて呼んでください*/var m="overwrite";
-			if(arguments.length==0){eval(fn);}	//パラメータなし=キーワード
+ 		if(arguments.length==0){eval(fn);}	//パラメータなし=キーワード
 			else{eval(st1s);}	//それ以外=文
 			return r;}
                        updated ★ function(){/*括弧を付けて呼んでください*/var m="updated";eval(fn);return r;}
@@ -433,11 +433,11 @@
                       unindent ★ function(){/*括弧を付けて呼んでください*/var m="unindent";eval(st);return r;}
                       shifttab ★ function(){/*括弧を付けて呼んでください*/var m="shifttab";eval(st);return r;}
                        toupper ★ function(){/*括弧を付けて呼んでください*/var m="toupper";
-			if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}	//最初のパラメータが文字列=関数
+ 		if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}	//最初のパラメータが文字列=関数
 			else{eval(st);}	//それ以外=文
 			return r;}
                        tolower ★ function(){/*括弧を付けて呼んでください*/var m="tolower";
-			if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}	//最初のパラメータが文字列=関数
+ 		if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}	//最初のパラメータが文字列=関数
 			else{eval(st);}	//それ以外=文
 			return r;}
                        tospace ★ function(){/*括弧を付けて呼んでください*/var m="tospace";eval(st);return r;}
@@ -449,7 +449,7 @@
                  imeconvforgot ★ function(){/*括弧を付けて呼んでください*/var m="imeconvforgot";eval(st);return r;}
                         reopen ★ function(){/*括弧を付けて呼んでください*/var m="reopen";eval(st);return r;}
                         filter ★ function(){/*括弧を付けて呼んでください*/var m="filter";
-			if(arguments.length>=4){eval(fs);}	//パラメータ4つ=関数
+ 		if(arguments.length>=4){eval(fs);}	//パラメータ4つ=関数
 			else{eval(st);}	//パラメータ3つ=文
 			return r;}
                     filtermenu ★ function(){/*括弧を付けて呼んでください*/var m="filtermenu";eval(st);return r;}
@@ -716,6 +716,5 @@
                  ddewaitadvice ★ function(){/*非サポート*/var m="ddewaitadvice";eval(ns);return 0;}
                 ddewaitadvicew ★ function(){/*非サポート*/var m="ddewaitadvicew";eval(ns);return 0;}
                        keepdde ★ function(){/*非サポート*/var m="keepdde";eval(ns);return 0;}
-
 
 ```
