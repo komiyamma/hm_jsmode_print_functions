@@ -12,6 +12,7 @@ js {
 
         if (! e.includes("hideamru") &&
             ! /^[a-z0-9_]+$/.test(e) &&
+            e != "EvalMacro" &&
             e != "EvalJs" &&
             e != "encodeURI" &&
             e != "decodeURI") {
