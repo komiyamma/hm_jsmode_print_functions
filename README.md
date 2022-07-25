@@ -8,8 +8,11 @@
 [![CC0](https://img.shields.io/badge/license-CC0-blue.svg?style=flat)](LICENSE)
 
 ```text
+
                          event ★ function(){/*括弧を付けて呼んでください*/var m="event";eval(fn);return r;}
                          print ★ function(){/*括弧を付けて呼んでください*/var m="print";eval(st);return r;}
+                     EvalMacro ★ function(s){return hidemaru.EvalMacro(s);}
+                        EvalJs ★ function(s){return eval(s);}
                         result ★ function(){/*括弧を付けて呼んでください*/var m="result";eval(fn);return r;}
                        version ★ function(){/*括弧を付けて呼んでください*/var m="version";eval(fn);return r;}
                       platform ★ function(){/*括弧を付けて呼んでください*/var m="platform";eval(fn);return r;}
@@ -713,4 +716,6 @@
                  ddewaitadvice ★ function(){/*非サポート*/var m="ddewaitadvice";eval(ns);return 0;}
                 ddewaitadvicew ★ function(){/*非サポート*/var m="ddewaitadvicew";eval(ns);return 0;}
                        keepdde ★ function(){/*非サポート*/var m="keepdde";eval(ns);return 0;}
+
+
 ```
