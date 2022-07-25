@@ -9,7 +9,7 @@ js {
     debuginfo(2);
     let list = Object.keys(Function("return this")());
     for ( let e of list ) {
-        
+
         if (! e.includes("hideamru") &&
             ! /^[a-z0-9_]+$/.test(e) &&
             e != "EvalJs" &&
