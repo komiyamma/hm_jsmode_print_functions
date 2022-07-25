@@ -1,0 +1,2 @@
+# hm_jsmode_print_functions
+秀丸のjsmodeの秀丸独自の関数一覧を出力する
