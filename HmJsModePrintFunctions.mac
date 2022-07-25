@@ -9,7 +9,8 @@ js {
     debuginfo(2);
     let list = Object.keys(Function("return this")());
     for ( let e of list ) {
-        if (! /^[a-z0-9_]+$/.test(e) ) {
+        
+        if (! e.includes("hideamru") && ! /^[a-z0-9_]+$/.test(e)) {
             continue;
         }
         if (e == "e_obj") {
