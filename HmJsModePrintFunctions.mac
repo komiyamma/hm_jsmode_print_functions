@@ -10,26 +10,26 @@ js {
 
     // グローバルにはAccess Deny があるオブジェクトがあるので、entries() 等のオブジェクトを直接拾うものは使えない。
     // よって文字列ベースで。
-    let list = Object.keys(Function("return this")());
-    for ( let e of list ) {
+    let func_name_list = Object.keys(Function("return this")());
+    for ( let func_name of func_name_list ) {
 
-        if (! e.includes("hideamru") &&
-            ! /^[a-z0-9_]+$/.test(e) &&
-            e != "EvalMacro" &&
-            e != "EvalJs" &&
-            e != "encodeURI" &&
-            e != "decodeURI") {
+        if (! func_name.includes("hideamru") &&
+            ! /^[a-z0-9_]+$/.test(func_name) &&
+            func_name != "EvalMacro" &&
+            func_name != "EvalJs" &&
+            func_name != "encodeURI" &&
+            func_name != "decodeURI") {
             continue;
         }
-        if (e == "e_obj") {
+        if (func_name == "func_obj") {
             continue;
         }
-        eval("e_obj = " + e);
-        if (e_obj != null) {
-            let e_str = e_obj.toString();
-            if (e_str.includes("var ") || e_str.includes("return") || e_str.includes(";")) {
-                e_str = e_str.replace("\t", " ");
-                console.log(sprintf("%30s", e) + " ★ " + e_str);
+        eval("func_obj = " + func_name);
+        if (func_obj != null) {
+            let func_text = func_obj.toString();
+            if (func_text.includes("var ") || func_text.includes("return") || func_text.includes(";")) {
+                func_text = func_text.replace("\t", " ");
+                console.log(sprintf("%30s", func_name) + " ★ " + func_text);
             }
         }
     }
