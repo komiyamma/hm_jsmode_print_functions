@@ -15,10 +15,8 @@ js {
 
         if (! func_name.includes("hideamru") &&
             ! /^[a-z0-9_]+$/.test(func_name) &&
-            func_name != "EvalMacro" &&
-            func_name != "EvalJs" &&
-            func_name != "encodeURI" &&
-            func_name != "decodeURI") {
+            func_name.toLowerCase() != "evalmacro" &&
+            func_name.toLowerCase() != "evaljs" ) {
             continue;
         }
         if (func_name == "func_obj") {
