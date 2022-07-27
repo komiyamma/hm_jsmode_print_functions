@@ -297,6 +297,13 @@
                      setencode ★ function(){/*括弧を付けて呼んでください*/var m="setencode";eval(st);return r;}
              stophistoryswitch ★ function(){/*括弧を付けて呼んでください*/var m="stophistoryswitch";eval(st);return r;}
                 deletefilehist ★ function(){/*括弧を付けて呼んでください*/var m="deletefilehist";eval(st);return r;}
+                          OPEN ★ function(){/*括弧を付けて呼んでください*/var m="OPEN";eval(st);return r;}
+                        SAVEAS ★ function(){/*括弧を付けて呼んでください*/var m="SAVEAS";eval(st);return r;}
+                          LOAD ★ function(){/*括弧を付けて呼んでください*/var m="LOAD";eval(st);return r;}
+                    APPENDSAVE ★ function(){/*括弧を付けて呼んでください*/var m="APPENDSAVE";eval(st);return r;}
+                    CHANGENAME ★ function(){/*括弧を付けて呼んでください*/var m="CHANGENAME";eval(st);return r;}
+                    INSERTFILE ★ function(){/*括弧を付けて呼んでください*/var m="INSERTFILE";eval(st);return r;}
+                  OPENFILEPART ★ function(){/*括弧を付けて呼んでください*/var m="OPENFILEPART";eval(st);return r;}
                     deletefile ★ function(){/*括弧を付けて呼んでください*/var m="deletefile";eval(st);return r;}
                 propertydialog ★ function(){/*括弧を付けて呼んでください*/var m="propertydialog";eval(st);return r;}
                           exit ★ function(){/*括弧を付けて呼んでください*/var m="exit";eval(st);return r;}
