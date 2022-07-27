@@ -1,6 +1,6 @@
 ﻿/*
  * This codes is licensed under CC0 1.0 Universal
- * HmJsModePrintFunctions v1.1.0
+ * HmJsModePrintFunctions v1.2.0
  */
 
 jsmode "WebView2", 1;
@@ -13,10 +13,19 @@ js {
     let func_name_list = Object.keys(Function("return this")());
     for ( let func_name of func_name_list ) {
 
+        let func_name_lower = func_name.toLowerCase();
         if (! func_name.includes("hideamru") &&
             ! /^[a-z0-9_]+$/.test(func_name) &&
-            func_name.toLowerCase() != "evalmacro" &&
-            func_name.toLowerCase() != "evaljs" ) {
+            func_name_lower != "evalmacro" &&
+            func_name_lower != "evaljs" &&
+            func_name != "OPEN" &&
+            func_name != "SAVEAS" &&
+            func_name != "LOAD" &&
+            func_name != "APPENDSAVE" &&
+            func_name != "CHANGENAME" &&
+            func_name != "INSERTFILE" &&
+            func_name != "OPENFILEPART"
+             ) {
             continue;
         }
         if (func_name == "func_obj") {
