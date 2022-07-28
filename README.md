@@ -4,15 +4,15 @@
 
 秀丸のjsmodeの秀丸独自の関数一覧を出力する
 
-![HmJsModePrintFunctions v1.2.0](https://img.shields.io/badge/HmJsModePrintFunctions-v1.2.0-6479ff.svg)
+![HmJsModePrintFunctions v1.3.0](https://img.shields.io/badge/HmJsModePrintFunctions-v1.3.0-6479ff.svg)
 [![CC0](https://img.shields.io/badge/license-CC0-blue.svg?style=flat)](LICENSE)
 
 ```text
 
                          event ★ function(){/*括弧を付けて呼んでください*/var m="event";eval(fn);return r;}
                          print ★ function(){/*括弧を付けて呼んでください*/var m="print";eval(st);return r;}
-                     EvalMacro ★ function(s){return hidemaru.EvalMacro(s);}
-                        EvalJs ★ function(s){return eval(s);}
+                     evalMacro ★ function(s){return hidemaru.evalMacro(s);}
+                        evalJs ★ function(s){return eval(s);}
                         result ★ function(){/*括弧を付けて呼んでください*/var m="result";eval(fn);return r;}
                        version ★ function(){/*括弧を付けて呼んでください*/var m="version";eval(fn);return r;}
                       platform ★ function(){/*括弧を付けて呼んでください*/var m="platform";eval(fn);return r;}
@@ -128,10 +128,7 @@
                         windir ★ function(){/*括弧を付けて呼んでください*/var m="windir";eval(fs);return r;}
                      winsysdir ★ function(){/*括弧を付けて呼んでください*/var m="winsysdir";eval(fs);return r;}
                  filehistcount ★ function(){/*括弧を付けて呼んでください*/var m="filehistcount";eval(fn);return r;}
-                     overwrite ★ function(){/*括弧を付けて呼んでください*/var m="overwrite";
- 		if(arguments.length==0){eval(fn);}	//パラメータなし=キーワード
-			else{eval(st1s);}	//それ以外=文
-			return r;}
+                     overwrite ★ function(){/*括弧を付けて呼んでください*/var m="overwrite";if(arguments.length==0){eval(fn);}else{eval(st1s);}return r;}
                        updated ★ function(){/*括弧を付けて呼んでください*/var m="updated";eval(fn);return r;}
                    updatecount ★ function(){/*括弧を付けて呼んでください*/var m="updatecount";eval(fn);return r;}
                   anyclipboard ★ function(){/*括弧を付けて呼んでください*/var m="anyclipboard";eval(fn);return r;}
@@ -254,7 +251,7 @@
                      ytolineno ★ function(){/*括弧を付けて呼んでください*/var m="ytolineno";eval(fn);return r;}
                      columntox ★ function(){/*括弧を付けて呼んでください*/var m="columntox";eval(fn);return r;}
                      linenotoy ★ function(){/*括弧を付けて呼んでください*/var m="linenotoy";eval(fn);return r;}
-                  getlinecount ★ function(){/*括弧を付けて呼んでください*/var m="getlinecount";eval(fn3rn);arguments[2].column=GetVar("###3");return r;}
+                  getlinecount ★ function(){/*括弧を付けて呼んでください*/var m="getlinecount";eval(fn3rn);arguments[2].column=getVar("###3");return r;}
                      charcount ★ function(){/*括弧を付けて呼んでください*/var m="charcount";eval(fn);return r;}
           enumcolormarkerlayer ★ function(){/*括弧を付けて呼んでください*/var m="enumcolormarkerlayer";eval(fs);return r;}
                      existfile ★ function(){/*括弧を付けて呼んでください*/var m="existfile";eval(fn);return r;}
@@ -267,7 +264,7 @@
                    getfilehist ★ function(){/*括弧を付けて呼んでください*/var m="getfilehist";eval(fs);return r;}
                    getpathhist ★ function(){/*括弧を付けて呼んでください*/var m="getpathhist";eval(fs);return r;}
                 getreplacehist ★ function(){/*括弧を付けて呼んでください*/var m="getreplacehist";eval(fs);return r;}
-                   getresultex ★ function(){/*括弧を付けて呼んでください*/var m="getresultex";eval(fs);return r;}
+                   getresultex ★ function(){/*括弧を付けて呼んでください*/var m="getresultex";eval(fsn);return r;}
                  getsearchhist ★ function(){/*括弧を付けて呼んでください*/var m="getsearchhist";eval(fs);return r;}
                    gettagsfile ★ function(){/*括弧を付けて呼んでください*/var m="gettagsfile";eval(fs);return r;}
                       gettitle ★ function(){/*括弧を付けて呼んでください*/var m="gettitle";eval(fs);return r;}
@@ -439,14 +436,8 @@
                         indent ★ function(){/*括弧を付けて呼んでください*/var m="indent";eval(st);return r;}
                       unindent ★ function(){/*括弧を付けて呼んでください*/var m="unindent";eval(st);return r;}
                       shifttab ★ function(){/*括弧を付けて呼んでください*/var m="shifttab";eval(st);return r;}
-                       toupper ★ function(){/*括弧を付けて呼んでください*/var m="toupper";
- 		if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}	//最初のパラメータが文字列=関数
-			else{eval(st);}	//それ以外=文
-			return r;}
-                       tolower ★ function(){/*括弧を付けて呼んでください*/var m="tolower";
- 		if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}	//最初のパラメータが文字列=関数
-			else{eval(st);}	//それ以外=文
-			return r;}
+                       toupper ★ function(){/*括弧を付けて呼んでください*/var m="toupper";if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}else{eval(st);}return r;}
+                       tolower ★ function(){/*括弧を付けて呼んでください*/var m="tolower";if(arguments.length>=1&&typeof(arguments[0])=="string"){eval(fs);}else{eval(st);}return r;}
                        tospace ★ function(){/*括弧を付けて呼んでください*/var m="tospace";eval(st);return r;}
                          totab ★ function(){/*括弧を付けて呼んでください*/var m="totab";eval(st);return r;}
                      tohankaku ★ function(){/*括弧を付けて呼んでください*/var m="tohankaku";eval(st);return r;}
@@ -455,10 +446,7 @@
                 capslockforgot ★ function(){/*括弧を付けて呼んでください*/var m="capslockforgot";eval(st);return r;}
                  imeconvforgot ★ function(){/*括弧を付けて呼んでください*/var m="imeconvforgot";eval(st);return r;}
                         reopen ★ function(){/*括弧を付けて呼んでください*/var m="reopen";eval(st);return r;}
-                        filter ★ function(){/*括弧を付けて呼んでください*/var m="filter";
- 		if(arguments.length>=4){eval(fs);}	//パラメータ4つ=関数
-			else{eval(st);}	//パラメータ3つ=文
-			return r;}
+                        filter ★ function(){/*括弧を付けて呼んでください*/var m="filter";if(arguments.length>=4){eval(fs);}else{eval(st);}return r;}
                     filtermenu ★ function(){/*括弧を付けて呼んでください*/var m="filtermenu";eval(st);return r;}
                   autocomplete ★ function(){/*括弧を付けて呼んでください*/var m="autocomplete";eval(st);return r;}
                           form ★ function(){/*括弧を付けて呼んでください*/var m="form";eval(st);return r;}
@@ -618,8 +606,8 @@
                       inputpos ★ function(){/*括弧を付けて呼んでください*/var m="inputpos";eval(st);return r;}
                           menu ★ function(){/*括弧を付けて呼んでください*/var m="menu";eval(st);return r;}
                      mousemenu ★ function(){/*括弧を付けて呼んでください*/var m="mousemenu";eval(st);return r;}
-                     menuarray ★ function(ary,c){var m="menu";eval(stary);return r;}
-                mousemenuarray ★ function(ary,c){var m="mousemenu";eval(stary);return r;}
+                     menuarray ★ function(ary,c){/*括弧を付けて呼んでください*/var m="menu";eval(stary);return r;}
+                mousemenuarray ★ function(ary,c){/*括弧を付けて呼んでください*/var m="mousemenu";eval(stary);return r;}
                   setmenudelay ★ function(){/*括弧を付けて呼んでください*/var m="setmenudelay";eval(st);return r;}
                          input ★ function(){/*括弧を付けて呼んでください*/var m="input";eval(fs);return r;}
                      inputchar ★ function(){/*括弧を付けて呼んでください*/var m="inputchar";eval(fn);return r;}
@@ -642,11 +630,11 @@
                      getregnum ★ function(){/*括弧を付けて呼んでください*/var m="getregnum";eval(fn);return r;}
                      getregstr ★ function(){/*括弧を付けて呼んでください*/var m="getregstr";eval(fs);return r;}
                     enumregkey ★ function(){/*括弧を付けて呼んでください*/var m="enumregkey";eval(fs);return r;}
-                  enumregvalue ★ function(){/*括弧を付けて呼んでください*/var m="enumregvalue";eval(fs2rn);arguments[1].regtype=GetVar("###2");return r;}
+                  enumregvalue ★ function(){/*括弧を付けて呼んでください*/var m="enumregvalue";eval(fs2rn);arguments[1].regtype=getVar("###2");return r;}
                      deletereg ★ function(){/*括弧を付けて呼んでください*/var m="deletereg";eval(st);return r;}
                      configset ★ function(){/*括弧を付けて呼んでください*/var m="configset";eval(st);return r;}
                         config ★ function(){/*括弧を付けて呼んでください*/var m="config";eval(st);return r;}
-                     getconfig ★ function(){/*括弧を付けて呼んでください*/var m="getconfig";eval(fs);return r;}
+                     getconfig ★ function(){/*括弧を付けて呼んでください*/var m="getconfig";eval(fsn);return r;}
                    configcolor ★ function(){/*括弧を付けて呼んでください*/var m="configcolor";eval(st);return r;}
                 getconfigcolor ★ function(){/*括弧を付けて呼んでください*/var m="getconfigcolor";eval(fn);return r;}
                     saveconfig ★ function(){/*括弧を付けて呼んでください*/var m="saveconfig";eval(st);return r;}
@@ -687,15 +675,15 @@
                   setclipboard ★ function(){/*括弧を付けて呼んでください*/var m="setclipboard";eval(st1s);return r;}
                   addclipboard ★ function(){/*括弧を付けて呼んでください*/var m="addclipboard";eval(st1s);return r;}
               getclipboardinfo ★ function(){/*括弧を付けて呼んでください*/var m="getclipboardinfo";eval(fs);return r;}
-                       loaddll ★ function(s){return hidemaru.LoadDll(s);}
-                 geteventparam ★ function(){/*括弧を付けて呼んでください*/var m="geteventparam";eval(fs);return r;}
+                       loaddll ★ function(s){/*括弧を付けて呼んでください*/return hidemaru.LoadDll(s);}
+                 geteventparam ★ function(){/*括弧を付けて呼んでください*/var m="geteventparam";eval(fsn);return r;}
                 seteventnotify ★ function(){/*括弧を付けて呼んでください*/var m="seteventnotify";eval(st);return r;}
                 geteventnotify ★ function(){/*括弧を付けて呼んでください*/var m="geteventnotify";eval(fn);return r;}
-                  createobject ★ function(s){return hidemaru.CreateObject(s);}
+                  createobject ★ function(){/*括弧を付けて呼んでください*/eval(co2);return r;}
                      execmacro ★ function(){/*括弧を付けて呼んでください*/var m="execmacro";eval(ns);return 0;}
                             js ★ function(){/*括弧を付けて呼んでください*/var m="js";eval(ns);return 0;}
                         jsmode ★ function(){/*括弧を付けて呼んでください*/var m="jsmode";eval(ns);return 0;}
-                        execjs ★ function(f){/*括弧を付けて呼んでください*/try {var t = hidemaru.LoadTextFile(f);eval(t);}catch(e){if(e=='endmacro'){}else if(e=='endmacroall'){throw e;}else{throw e;}}}
+                        execjs ★ function(file){/*括弧を付けて呼んでください*/try {var t = hidemaru.loadTextFile(file);eval(t);}catch(e){if(e=='endmacro'){}else if(e=='endmacroall'){throw e;}else{throw e;}}}
                           call ★ function(){/*非サポート*/var m="call";eval(ns);return 0;}
                        refcall ★ function(){/*非サポート*/var m="refcall";eval(ns);return 0;}
              setactivehidemaru ★ function(){/*非サポート*/var m="setactivehidemaru";eval(ns);return 0;}
