@@ -8,6 +8,8 @@ jsmode "WebView2", 1;
 js {
     debuginfo(2); // console.log 有効化
 
+    let wrongMap = new Map();
+    
     // グローバルにはAccess Deny があるオブジェクトがあるので、entries() 等のオブジェクトを直接拾うものは使えない。
     // よって文字列ベースで。
     let func_name_list = Object.keys(Function("return this")());
@@ -38,7 +40,30 @@ js {
             let func_text = func_obj.toString();
             if (func_text.includes("var ") || func_text.includes("return") || func_text.includes(";")) {
                 func_text = func_text.replace("\t", " ");
-                console.log(sprintf("%30s", func_name) + " ★ " + func_text);
+                wrongMap[func_name] = true;
+                if (func_text.includes("eval(ns)")) {
+                    console.log(sprintf("%30s", func_name) + " ✕ " + func_text);
+                } else {
+                    console.log(sprintf("%30s", func_name) + " ★ " + func_text);
+                }
+            }
+        }
+    }
+
+	let func_name_list2 = Object.keys(hidemaruGlobal);
+    for ( let func_name of func_name_list2 ) {
+        if (wrongMap[func_name] != true) {
+
+            eval("func_obj = " + func_name);
+            let func_text = func_obj.toString();
+            if (func_text.includes("var ") || func_text.includes("return") || func_text.includes(";")) {
+                func_text = func_text.replace("\t", " ");
+                wrongMap[func_name] = true;
+                if (func_text.includes("eval(ns)")) {
+                    console.log(sprintf("%30s", func_name) + " ✕ " + func_text);
+                } else {
+                    console.log(sprintf("%30s", func_name) + " ★ " + func_text);
+                }
             }
         }
     }
