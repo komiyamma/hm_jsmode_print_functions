@@ -18,6 +18,8 @@ js {
             ! /^[a-z0-9_]+$/.test(func_name) &&
             func_name_lower != "evalmacro" &&
             func_name_lower != "evaljs" &&
+            func_name_lower != "setvar" &&
+            func_name_lower != "getvar" &&
             func_name != "OPEN" &&
             func_name != "SAVEAS" &&
             func_name != "LOAD" &&

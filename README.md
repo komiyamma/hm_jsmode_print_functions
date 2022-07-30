@@ -11,6 +11,8 @@
 
                          event ★ function(){/*括弧を付けて呼んでください*/var m="event";eval(fn);return r;}
                          print ★ function(){/*括弧を付けて呼んでください*/var m="print";eval(st);return r;}
+                        getVar ★ function(s){return hidemaru.getVar(s);}
+                        setVar ★ function(s,v){return hidemaru.setVar(s,v);}
                      evalMacro ★ function(s){return hidemaru.evalMacro(s);}
                         evalJs ★ function(s){return eval(s);}
                         result ★ function(){/*括弧を付けて呼んでください*/var m="result";eval(fn);return r;}
