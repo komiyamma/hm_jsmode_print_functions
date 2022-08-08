@@ -96,4 +96,3 @@ dumpObj(obj3);
 
 }
 
-JScript版は、JSON.stringifyが不完全なので、これでは対処できない。
