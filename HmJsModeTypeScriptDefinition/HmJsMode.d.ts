@@ -12268,7 +12268,82 @@ declare function play(wav_filepath: string): number;
  */
 declare function playsync(wav_filepath: string): number;
 
-debuginfo ★★★ function() { var m = "debuginfo"; eval(st); return r; }
+/**
+ * s
+ * 
+ * debuginfo文は、デバッグ出力を行います。    
+ * 
+ * @param output_mode 
+ * 出力方法を指定します。    
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function debuginfo(output_mode: number): number;
+
+/**
+ * s
+ * 
+ * debuginfo文は、デバッグ出力を行います。    
+ * 
+ * @param output_mode 
+ * 出力方法を指定します。    
+ * debuginfo文は、デバッグメッセージの表示の禁止／許可を行います。    
+ * - 0を指定した場合、デバッグメッセージの表示を禁止します。    
+ * - 0以外を指定した場合、デバッグメッセージの表示を許可されます。    
+ * - 2を指定した場合は、デバッグメッセージに加えて、アプトプット枠にも出力します。    
+ * マクロ実行直後は禁止になっています。
+ * 
+ * @example
+ * debuginfo(2);
+ *  
+ * 参照：    
+ * @see showvars
+ * @see execmacro で別のマクロを実行する場合
+ * @see setactivehidemaru 等で別の秀丸エディタに切り替わった場合
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function debuginfo(output_mode: number): number;
+
+/**
+ * s
+ * 
+ * debuginfo文は、デバッグ出力を行います。    
+ * 
+ * @param message 
+ * 出力する内容を指定します。    
+ * 改行文字を出力したい場合は、"\r\n"を使って下さい。
+ * OutputDebugString関数を使ってその文字列をデバッグアプリケーションに表示します。    
+ * 
+ * @example
+ * debuginfo(1);
+ * var a = 100;
+ * debuginfo("a = " + a + "\r\n");
+
+ * 
+ * @comment
+ * デバッグアプリケーションが常駐していない時にこの文を実行すると、文字列はデバッグ端末に送られます。    
+ * デバッグアプリケーションもデバッグ端末もない場合はWindowsの動作がおかしくなることがあるので注意してください。    
+ * デバッグアプリケーションは、フリーソフトでいろいろ公開されていたりするので、入手して使うことができます。    
+ * 「デバッガ」「OutputDebugString」等でWeb検索すると見付かるかもしれません。    
+ * Microsoftの「DebugView」というソフトもあります。     
+ * 秀丸用の「秀丸エディタ・デバッグ出力モニター」もあります。    
+ * 
+ * @example
+ * debuginfo(2);
+ * debuginfo("アウトプット枠\r\n");
+ * 
+ * 参照：    
+ * @see showvars
+ * @see execmacro で別のマクロを実行する場合
+ * @see setactivehidemaru 等で別の秀丸エディタに切り替わった場合
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function debuginfo(message: string): number;
 
 /**
  * s
@@ -12483,8 +12558,6 @@ loadkeyassign ★ function() { var m = "loadkeyassign"; eval(st); return r; }
 savekeyassign ★ function() { var m = "savekeyassign"; eval(st); return r; }
 loadhilight ★ function() { var m = "loadhilight"; eval(st); return r; }
 savehilight ★ function() { var m = "savehilight"; eval(st); return r; }
-
-loadbookmark ★ function() { var m = "loadbookmark"; eval(st); return r; }
 
 /**
  * s
