@@ -12450,9 +12450,73 @@ declare function title(title_behavior: number, target_location: number): number;
 disabledraw ★ function() { var m = "disabledraw"; eval(st); return r; }
 enabledraw ★ function() { var m = "enabledraw"; eval(st); return r; }
 disabledraw2 ★ function() { var m = "disabledraw2"; eval(st); return r; }
-disablebreak ★ function() { var m = "disablebreak"; eval(st); return r; }
-disableinvert ★ function() { var m = "disableinvert"; eval(st); return r; }
-enableinvert ★ function() { var m = "enableinvert"; eval(st); return r; }
+
+
+/**
+ * s
+ * 
+ * disablebreak文は、マクロの中断を禁止します。    
+ * 
+ * @comment
+ * 秀丸エディタのマクロは実行中にESCキーを入力したり、マウスでクリックしたりすると「中断しますか？」と聞いてくる仕様になっています。    
+ * disablebreak文を実行すると、そのマクロでは中断を一切受け付けなくなります。    
+ * 
+ * enablebreak文はdisablebreakされた状態を解除します。
+ * 
+ * 参照：    
+ * @see enablebreak
+ * @see execmacroで別のマクロを実行する場合
+ * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function disablebreak(): number;
+
+/**
+ * s
+ * 
+ * enablebreak文はdisablebreakされた状態を解除します。    
+ * 
+ * @see disablebreak
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function enablebreak(): number;
+
+/**
+ * s
+ * 
+ * disableinvert文は、範囲選択のときの反転表示を禁止します。    
+ * 
+ * @comment
+ * enableinvert文は、disableinvertを解除します。    
+ * マクロ実行中の反転表示は目ざわりな場合が多いので、その場合はあらかじめdisableinvertしてから範囲選択すれば、画面上では反転せずに範囲選択されます。
+ * 
+ * 参照：    
+ * @see enableinvert
+ * @see execmacroで別のマクロを実行する場合
+ * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function disableinvert(): number;
+
+/**
+ * s
+ * 
+ * enableinvert文は、disableinvertを解除します。    
+ * 
+ * 参照：    
+ * @seedisableinvert
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function enableinvert(): number;
+
 disableerrormsg ★ function() { var m = "disableerrormsg"; eval(st); return r; }
 enableerrormsg ★ function() { var m = "enableerrormsg"; eval(st); return r; }
 disablehistory ★ function() { var m = "disablehistory"; eval(st); return r; }
