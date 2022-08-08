@@ -43,6 +43,8 @@ js {
                 wrongMap[func_name] = true;
                 if (func_text.includes("eval(ns)")) {
                     console.log(sprintf("%30s", func_name) + " ✕ " + func_text);
+                } else if (func_text.includes("throw \"end")) {
+                    console.log(sprintf("%30s", func_name) + " ✕ " + func_text);
                 } else {
                     console.log(sprintf("%30s", func_name) + " ★ " + func_text);
                 }
