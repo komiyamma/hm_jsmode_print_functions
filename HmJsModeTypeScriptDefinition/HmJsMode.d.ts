@@ -10758,7 +10758,18 @@ deletecolormarkerall ★ function() { var m = "deletecolormarkerall"; eval(st); 
 selectcolormarker ★ function() { var m = "selectcolormarker"; eval(st); return r; }
 selectallfound ★ function() { var m = "selectallfound"; eval(st); return r; }
 colormarkerallfound ★ function() { var m = "colormarkerallfound"; eval(st); return r; }
-clearcolormarkerallfound ★ function() { var m = "clearcolormarkerallfound"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * clearcolormarkerallfound文は、「すべての候補の色付けを消去」を実行します。    
+ * 
+ * 「すべての候補の色付け」コマンドで色付けされていたものを消去します。    
+ * 
+ * @returns
+ * 
+ */
+declare function clearcolormarkerallfound(): number;
 
 /**
  * s
@@ -11414,9 +11425,8 @@ declare function imeswitch(): number;
 /**
  * s
  * 
- * ★★★機能していないのではないか？
- * 
- * imeregisterword文は、「かな漢への単語登録」を実行します。
+ * imeregisterword文は、「かな漢への単語登録」のダイアログを表示します。    
+ * IMEが対応していない場合は、機能しません。
  * 
  * @comment
  * かな漢への単語登録とは、    
