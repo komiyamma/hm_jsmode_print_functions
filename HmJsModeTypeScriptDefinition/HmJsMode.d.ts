@@ -12879,11 +12879,68 @@ declare function setwindowsize(width_column: number, height_lineno): number;
  * 
  * 参照：    
  * @see getfocus
+ * 
+ * @returns
+ * フォーカスを移動したら１を返す、    
+ * フォーカスを移動できなければ０を返す
  */
 declare function setfocus(window_target: number): number;
 
-begingroupundo ★ function() { var m = "begingroupundo"; eval(st); return r; }
-endgroupundo ★ function() { var m = "endgroupundo"; eval(st); return r; }
+/**
+ * s
+ * 
+ * begingroupundo文は、複数の編集操作のやり直しを一度でできるようにします。    
+ * begingroupundoをしてからendgroupundoをするまでに編集を加えた部分を一度の編集とみなし、やり直しを一度でできるようにします。
+ * 
+ * @example
+ * begingroupundo();
+ * insert("a");
+ * insert("b");
+ * insert("c");
+ * endgroupundo();
+ * 
+ * @comment
+ * キー操作の記録で全置換したものをキー操作の保存をすると、endgroupundo 1; というようにパラメータが付きます。    
+ * これは全置換のためのグループ化ということを意味しています。    
+ * undo文でやり直しをまとめてするか１つずつするかの指定が適用されるようになります。    
+ * 
+ * 参照：
+ * @see endgroupundo
+ * @see undo
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function begingroupundo(): number;
+
+/**
+ * s
+ * 
+ * endgroupundo文は、begingroupundo文で開始した編集操作の終わりを指示します。    
+ * begingroupundoをしてからendgroupundoをするまでに編集を加えた部分を一度の編集とみなし、やり直しを一度でできるようにします。
+ * 
+ * @example
+ * begingroupundo();
+ * insert("a");
+ * insert("b");
+ * insert("c");
+ * endgroupundo();
+ * 
+ * @comment
+ * キー操作の記録で全置換したものをキー操作の保存をすると、endgroupundo 1; というようにパラメータが付きます。    
+ * これは全置換のためのグループ化ということを意味しています。    
+ * undo文でやり直しをまとめてするか１つずつするかの指定が適用されるようになります。    
+ * 
+ * 参照：
+ * @see begingroupundo
+ * @see undo
+ * 
+ * @returns
+ * begingroupundoされており、それを解除できたなら１が返ってくる    
+ * begingroupundoされていなければ、０が返ってくる。
+ */
+declare function endgroupundo(): number;
+
 findspecial ★ function() { var m = "findspecial"; eval(st); return r; }
 setstaticvariable ★ function() { var m = "setstaticvariable"; eval(st); return r; }
 getstaticvariable ★ function() { var m = "getstaticvariable"; eval(fs); return r; }
