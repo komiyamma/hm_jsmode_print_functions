@@ -12845,8 +12845,43 @@ declare function setwindowpos(pos_x_left: number, pos_y_top: number): number;
  */
 declare function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom): number;
 
-setwindowsize ★ function() { var m = "setwindowsize"; eval(st); return r; }
-setfocus ★ function() { var m = "setfocus"; eval(st); return r; }
+/**
+ * s
+ * 
+ * setwindowsize文は、現在のウィンドウサイズを文字数単位で指定します。    
+ * 
+ * @param width_column 
+ * 何文字の横幅(桁幅)にするかを指定する。
+ * 
+ * @param height_lineno 
+ * 何文字の縦幅(行幅)にするかを指定する。
+ * 
+ * @example
+ * setwindowsize(80, 20); // この場合は横80桁×縦20行となります。
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setwindowsize(width_column: number, height_lineno): number;
+
+/**
+ * s
+ * 
+ * setfocus文は、指定したウィンドウに入力フォーカスを設定します。    
+ * 
+ * @param window_target
+ * 以下の値を指定できます。    
+ * - 1  編集エリア 
+ * - 2  アウトライン解析の枠 
+ * - 3  ツールバーの検索ボックス 
+ * - 4  ファイルマネージャ枠
+ * - 5  アウトプット枠
+ * 
+ * 参照：    
+ * @see getfocus
+ */
+declare function setfocus(window_target: number): number;
+
 begingroupundo ★ function() { var m = "begingroupundo"; eval(st); return r; }
 endgroupundo ★ function() { var m = "endgroupundo"; eval(st); return r; }
 findspecial ★ function() { var m = "findspecial"; eval(st); return r; }
