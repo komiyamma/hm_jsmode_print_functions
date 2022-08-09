@@ -1,3 +1,8 @@
+/*
+ * This codes is licensed under CC0 1.0 Universal
+ * HmJsModePrintFunctions v1.2.0
+ */
+
 function _dumpObjHelper(obj, level) {
     var dumped_text = "";
     if(!level) level = 0;
