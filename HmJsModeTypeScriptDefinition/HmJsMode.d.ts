@@ -10428,7 +10428,46 @@ findup2 ★ function() { var m = "findup2"; eval(st); return r; }
 getsearch ★ function() { var m = "getsearch"; eval(st); return r; }
 gosearchstarted ★ function() { var m = "gosearchstarted"; eval(st); return r; }
 setsearch ★ function() { var m = "setsearch"; eval(st); return r; }
-setreplace ★ function() { var m = "setreplace"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * setreplace文は、秀丸エディタが内部で保持している置換文字列の内容を設定します。
+ * 
+ * @param replace_text
+ * 置換文字列を指定します
+ * 
+ * @example
+ * setreplace("置換文字列");
+ * 
+ * @comment
+ * 例えば、setsearchで検索文字列の内容と、検索オプションの0x00000004（置換を有効）にして、    
+ * setreplaceで置換バッファの内容を設定してからfinddownを実行すると、replacedownを実行したのと同じ結果が得られます。    
+ * 
+ * setreplaceと逆に、置換バッファの内容を参照するには、replacebufferという値を使います。    
+ * 
+ * @example
+ * var s = searchbuffer();
+ * var f = searchoption();
+ * var f2 = searchoption2();
+ * var r = replacebuffer();
+ * …
+ * 処理本体…
+ * …
+ * setsearch(s, f, f2);
+ * setreplace(r);
+ * 
+ * @comment
+ * 検索/置換文字列には上限があります。    
+ * 上限を超える可能性がある場合は事前に文字数をカウントして判断する必要があります。    
+ * 
+ * 参照：
+ * @see 検索と置換文字列の上限について
+ * 
+ * @returns
+ * 返ってくる値に意味はない。
+ */
+declare function setreplace(replace_text: string): number
 
 /**
  * s
@@ -12517,8 +12556,46 @@ declare function disableinvert(): number;
  */
 declare function enableinvert(): number;
 
-disableerrormsg ★ function() { var m = "disableerrormsg"; eval(st); return r; }
-enableerrormsg ★ function() { var m = "enableerrormsg"; eval(st); return r; }
+/**
+ * s
+ * 
+ * disableerrormsg文は、各種のコマンドの中でエラーが発生してもエラーメッセージを表示しないようにします。    
+ * enableerrormsg文は元に戻します。    
+ * マクロ起動直後はenableになっています。    
+ * 
+ * 各種のコマンドの中でのエラーとは、例えば以下のような例があります。    
+ * 
+ * - appendsaveで指定されたファイルが見つからなかった 
+ * - showcliphistで、ユーザが何も取り出さずにダイアログを閉じた 
+ * - その他、「エラー」というタイトルのメッセージボックスが表示される処理すべて
+ * （ただし、goto文でラベルが無いなど、マクロ実行に支障がある文法上のエラーなどは必ず表示されます） 
+ * - disableerrormsgを実行しても、各関数のエラーなどの状況を示す返り値は変わりありません。
+ * - disableerrormsg文を実行した場合はエラーになっていてもエラーダイアログが出なくなるため、    
+ * 以後エラーの処理を正しく行うようにしてください。
+ * 
+ * 参照：
+ * @see enableerrormsg
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function disableerrormsg(): number;
+
+/**
+ * s
+ * 
+ * enableerrormsg文は、disableerrormsg文によって抑制されたエラーメッセージを表示を、    
+ * 元の表示される状態へと戻します。
+ * 
+ * 参照：
+ * @see disableerrormsg
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function enableerrormsg(): number;
+
+
 disablehistory ★ function() { var m = "disablehistory"; eval(st); return r; }
 
 /**
