@@ -13135,16 +13135,6 @@ declare function endmacroall(): 0;
 /**
  * z    
  * 
- * @throws "endmacroall"
- * 
- * この関数はjsmodeでは機能しません。
- * @deprecated
- */
-declare function endmacroall(): 0;
-
-/**
- * z    
- * 
  * この関数はjsmodeでは機能しません。
  * @deprecated
  */
