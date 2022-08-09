@@ -12737,11 +12737,114 @@ declare function settabstop(n_prop: 0|number, tab_width_settings:string): 0;
  */
 declare function gettabstop(n_prop: 0|number): string;
 
+/**
+ * s
+ * 
+ * convert_return_in_cell文は、「セル内改行の変換」を行います。    
+ * 
+ * @comment
+ * TSV/CSVモードでファイルを読み込んだ直後、    
+ * セル内に改行が含まれると判断された場合、通常は上部にバーが表示されます。    
+ * このとき、バーをクリックするか、[表示]→[タブストップ]→[セル内改行の変換...]によって、    
+ * セル内の改行をどのように扱うかを選択できます。    
+ * 
+ * convert_return_in_cell文は、この操作をマクロとしてダイアログを出さずに実行します。    
+ * 
+ * @param convert_mode
+ * 0を指定すると、特殊改行に変換します。    
+ * 1を指定すると、特殊半角矢印に変換します。    
+ *
+ * @comment
+ * return_in_cell_modeキーワードで現在の変換された状態を知ることができます。
+ * 
+ * 参照:
+ * @see return_in_cell_mode
+ * 
+ * @returns
+ * １つでも変換したら１を返す。    
+ * なにも変換しなければ０を返す。
+ */
+declare function convert_return_in_cell(convert_mode: number): number;
 
-convert_return_in_cell ★ function() { var m = "convert_return_in_cell"; eval(st); return r; }
-showwindow ★ function() { var m = "showwindow"; eval(st); return r; }
-setmonitor ★ function() { var m = "setmonitor"; eval(st); return r; }
-setwindowpos ★ function() { var m = "setwindowpos"; eval(st); return r; }
+/**
+ * s
+ * 
+ * showwindow文は、現在のウィンドウの表示／非表示などを行います。    
+ * 
+ * @param show_mode
+ * 値と意味は以下の通りです。
+ * - 0 ウィンドウ非表示（SW_HIDE） 
+ * - 1 最大化／最小化（アイコン化）されたウィンドウを元に戻す 
+ * - 2 最小化（アイコン化）（SW_SHOWMINIMIZED） 
+ * - 3 最大化（SW_SHOWMAXIMIZED） 
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function showwindow(show_mode: number): number;
+
+/**
+ * s
+ * 
+ * setmonitor文は、現在のウィンドウをパラメータで指定されたモニタに移動します。    
+ * マルチモニタ環境でないと何も起きません。
+ * 
+ * @param monitor_ix
+ * 
+ * @example
+ * if( monitor() == 0 ) {
+ *    setmonitor 1;
+ * } else {
+ *    setmonitor 0;
+ * }
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setmonitor(monitor_ix: number): number;
+
+/**
+ * s
+ * setwindowpos文は、現在のウィンドウをパラメータで指定した位置に移動します。    
+ * 
+ * ウィンドウが最大化されている場合は何もしません。   
+ * ウィンドウの位置は、画面のピクセル単位で指定します。    
+ * 
+ * @param pos_x_left 
+ * ウィンドウの左上のxピクセル位置、
+ * 
+ * @param pos_y_top 
+ * ウィンドウの左上のyピクセル位置、
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setwindowpos(pos_x_left: number, pos_y_top: number): number;
+
+/**
+ * s
+ * setwindowpos文は、現在のウィンドウをパラメータで指定した位置に移動します。    
+ * 
+ * ウィンドウの位置は、画面のピクセル単位で指定します。    
+ * ウィンドウが最大化されている場合は何もしません。   
+ * 
+ * @param pos_x_left 
+ * ウィンドウの左上のxピクセル位置、
+ * 
+ * @param pos_y_top 
+ * ウィンドウの左上のyピクセル位置、
+ * 
+ * @param pos_x_right 
+ * ウィンドウの右下のxピクセル位置、
+ * 
+ * @param pos_y_bottom 
+ * ウィンドウの右下のyピクセル位置、
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setwindowpos(pos_x_left: number, pos_y_top: number, pos_x_right: number, pos_y_bottom): number;
+
 setwindowsize ★ function() { var m = "setwindowsize"; eval(st); return r; }
 setfocus ★ function() { var m = "setfocus"; eval(st); return r; }
 begingroupundo ★ function() { var m = "begingroupundo"; eval(st); return r; }
