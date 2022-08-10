@@ -13099,7 +13099,48 @@ declare function setmenudelay(millisecond: number): number;
  */
 declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number ): number;
 
-inputchar ★ function() { var m = "inputchar"; eval(fn); return r; }
+
+/**
+ * f
+ * 
+ * inputchar関数は、キー入力の待機状態にして、入力されたキーの文字コードを取得します。
+ * 
+ * @param wait_titlebar_text 
+ * 待機状態のときのタイトルバーの内容を文字列で指定します。
+ * 
+ * @example
+ * var c = inputchar("キーを入力してください");
+ * 
+ * @comment
+ * 入力した文字は画面には表示されません。
+ * カーソル移動キーが押された場合は文字コードは、以下のようになります。
+ * - 左    0x1C 
+ * - 上    0x1D 
+ * - 右    0x1E 
+ * - 下    0x1F 
+ * 
+ * @param millisecond 
+ * 指定しないか0を指定すると、タイムアウトしません。    
+ * 数値を指定すると、ミリ秒単位の時間経過後にタイムアウトします。
+ * 
+ * @param is_title_keep 
+ * 1を指定すると、タイトルを変えないようになります。
+ * 
+ * @example
+ * var c = inputchar("キーを入力してください",5000);
+ * message(hex(c));
+ * 
+ * 参照：
+ * @see iskeydown
+ * @see keypressed
+ * @see keypressedex
+ * 
+ * @returns
+ * 文字コードを返します。    
+ * タイムアウトした場合は0が返ります。
+ */
+declare function inputchar(wait_titlebar_text: string, millisecond?: number, is_title_keep?: number): number;
+
 iskeydown ★ function() { var m = "iskeydown"; eval(fn); return r; }
 getininum ★ function() { var m = "getininum"; eval(fn); return r; }
 getininumw ★ function() { var m = "getininumw"; eval(fn); return r; }
