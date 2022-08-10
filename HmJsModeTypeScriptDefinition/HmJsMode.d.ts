@@ -1,7 +1,8 @@
 /**
  * @file 秀丸のjsmode用のTypeScript定義ファイル
  * @author Akitsugu Komiyama
- * @copyright 各関数の説明内容については、サイトー企画に著作権が帰属します。TypeScript定義ファイル化については、Akitsugu Komiyama に著作権が帰属します。
+ * @copyright 「各関数の説明内容」については、「サイトー企画 (https://hide.maruo.co.jp/)」に著作権が帰属します。    
+ *            「TypeScript定義ファイル化」については、Akitsugu Komiyama に著作権が帰属します。
  * @license MIT
  * @version v1.0.0
  */
@@ -48,6 +49,29 @@ declare namespace hidemaru {
   };
 
   function loadDll(dllpath: string): IResultLoadDll;
+
+
+  /**
+   * loadTextFileメソッドは、テキストファイルを読み込んで文字列で取得します。
+   * 
+   * @param filepath 
+   * ファイル名をフルパスで指定します。
+   * 
+   * @example
+   * js{
+   *     var text = hidemaru.loadTextFile("c:\\folder\\a.txt");
+   * }
+   * 
+   * @comment
+   * ファイルは、Shift-JIS,UTF-8,UTF-16を自動認識します。    
+   * ファイルの内容をテキストに変換し、文字列として返します。    
+   * 10MBの上限があります。
+   * 
+   * @returns
+   * 読み込みに成功した場合、ファイルの内容を文字列で返します。    
+   * 失敗した場合、undefinedを返します。
+   */
+  function loadTextFile(filepath: string): string | undefined;
 }
 
 /**
@@ -5125,7 +5149,7 @@ declare function findwindowclass(window_class_name: string): number;
  * メッセージの値やwParam、lParamの値は、処理するウィンドウによります。
  * 
  * @example
- * var result = sendmessage(outlinehandle, 0x111, 7119, 0); //0x111=WM_COMMAND, 7119=枠内の検索 
+ * var ret = sendmessage(outlinehandle, 0x111, 7119, 0); //0x111=WM_COMMAND, 7119=枠内の検索 
  * 
  * @return
  * メッセージを送ったウィンドウが返した値を返す。    
@@ -10830,7 +10854,77 @@ declare function foundlist(): number;
  */
 declare function foundlistoutline(): number;
 
-★★★ findmarkerlist ★ function() { var m = "findmarkerlist"; eval(st); return r; }
+/**
+ * findmarkerlist文は、「検索の色付け一覧...」コマンドによるダイアログの表示をします。    
+ * 
+ * @example
+ * findmarkerlist();
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+ declare function findmarkerlist(): number;
+
+/**
+ * s
+ * 
+ * findmarkerlist文は、「検索の色付け一覧...」コマンドによる操作をします。    
+ * 
+ * @param marker_ix 
+ * 0以上の値を指定すると、ダイアログを表示せず、    
+ * 「検索の色付け一覧...」の0から数えた項目に対する操作をします。    
+ * 
+ * @param n_action
+ * - 0を指定すると、指定した項目を再度色付けします。一覧の個数を超えている場合は返り値は0になります。
+ * - 1を指定すると、指定した項目を消去します。一覧の個数を超えている場合は返り値は0になります。
+ * - 2を指定すると、指定した項目を検索バッファと検索オプションに適用します。一覧の個数を超えている場合は返り値は0になります。
+ * - 3を指定すると、指定した項目で検索ダイアログを出します。一覧の個数を超えている場合は返り値は0になります。
+ * - 4を指定すると、指定した項目の上検索をします。検索失敗時返り値は0になります。
+ * - 5を指定すると、指定した項目の下検索をします。検索失敗時返り値は0になります。
+ * - 6を指定すると、指定した項目の文字色が返り値になります。一覧の個数を超えている場合は返り値は-1になります。
+ * - 7を指定すると、指定した項目の背景色が返り値になります。一覧の個数を超えている場合は返り値は-1になります。
+ * 
+ * @example
+ * var c=0;
+ * var r="検索の色付けの色一覧\n";
+ * while(1) {
+ *   var color = findmarkerlist(c,6);
+ *   if(color < 0){
+ *       break;
+ *   }
+ *   var back = backfindmarkerlist(c,7);
+ *   r = r+" text:"+rightstr("000000"+hex(color),6)
+ *       +" back:"+rightstr("000000"+hex(back),6)
+ *       +"\n";
+ *   c=c+1;
+ * }
+ * message(r);
+ * 
+ * @returns
+ * n_actionによって、それぞれの結果に対応する値を返します。
+ */
+declare function findmarkerlist(marker_ix: number, n_action: number): number;
+
+/**
+ * s
+ * 
+ * findmarkerlist文は、「検索の色付け一覧...」にある項目のすべてを対象とした操作をします。
+ * 
+ * @param marker_ix 
+ * -1を指定します。    
+ * ダイアログを表示せず、「検索の色付け一覧...」にある項目のすべてを対象とした操作をします。
+ * 
+ * @param is_delete_all_mark 
+ * 0を指定すると、すべての項目を再度色付けします。    
+ * 1を指定すると、すべての項目を消去します。
+ * 
+ * @example
+ * findmarkerlist(-1,0);	//「すべて再度色付け」をします。
+ *
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function findmarkerlist(marker_ix: -1, is_delete_all_mark: number): number;
 
 /**
  * s
@@ -12595,8 +12689,36 @@ declare function disableerrormsg(): number;
  */
 declare function enableerrormsg(): number;
 
-
-disablehistory ★ function() { var m = "disablehistory"; eval(st); return r; }
+/**
+ * s
+ * 
+ * disablehistory文は、マクロ実行中、各種ヒストリを取らないように指示する文です。    
+ * 
+ * @param history_flag
+ * 引数に以下の値の論理和した値を入れて指示します。
+ * - 0x0001　ファイルヒストリ
+ * - 0x0002　フォルダヒストリ
+ * - 0x0004　検索ヒストリ
+ * - 0x0008　置換ヒストリ
+ * - 0x0010　grepファイルヒストリ
+ * - 0x0020　プログラム実行ヒストリ
+ * - 0x0040　クリップボード履歴
+ * - 0x0080　/nオプション,またはopenfileのnoaddhistと同じ扱い
+ * - 0x0100　今開いているファイル(自分自身)をヒストリに残さないようにする
+ *
+ * 0x0001と0x0080と0x0100の違い    
+ * - 0x0001 は、マクロ実行中に開いたり閉じたりしたときだけにファイルヒストリに残らなくなり、マクロが終了した後にファイルを閉じるとヒストリに残ります。
+ * - 0x0080 は、マクロ実行中に開いたファイルは、マクロが終了した後もヒストリに残らなくなります。
+ * - 0x0100 は、マクロ実行中にファイルを開かなくても、自分自身がヒストリに残らないようになります。一般的にはファイルを開いていた時点で既にヒストリにあるので効果は無いですが、changenameした場合に効果があります。
+ * 
+ * 参照：    
+ * @see execmacroで別のマクロを実行する場合
+ * @see setactivehidemaru等で別の秀丸エディタに切り替わった場合
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function disablehistory(history_flag: number): number;
 
 /**
  * s
