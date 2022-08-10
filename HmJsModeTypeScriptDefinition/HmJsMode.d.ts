@@ -10419,7 +10419,25 @@ declare function template(filepath?: string): number;
  */
 declare function find1(): number;
 
-★★★ find2 ★ function() { var m = "find2"; eval(st); return r; }
+/**
+ * s
+ * 
+ * find2文は、検索ダイアログを出します。    
+ * - searchbufferで得られる内容    
+ * - searchoptionの状態フラグ、    
+ * - find2文の直前にforceinselect文が実行されていれば、その指定が有効となります。    
+ * 
+ * 参照：
+ * @see searchbuffer
+ * @see searchoption
+ * @see forceinselect
+ * 
+ * @returns
+ * ダイアログで検索をして、成功(=ヒット)した場合は1を返す。    
+ * ダイアログで検索をして、失敗(=ヒットせず)した場合は0を返す。    
+ * ダイアログでキャンセルした場合は -2 を返す。
+ */
+declare function find1(): number;
 
 /**
  * s
@@ -10445,10 +10463,12 @@ replaceup ★ function() { var m = "replaceup"; eval(st1s2s); return r; }
 replaceall ★ function() { var m = "replaceall"; eval(st); return r; }
 replaceallfast ★ function() { var m = "replaceallfast"; eval(st); return r; }
 replaceallquick ★ function() { var m = "replaceallquick"; eval(st); return r; }
+
 finddown ★ function() { var m = "finddown"; eval(st); return r; }
 finddown2 ★ function() { var m = "finddown2"; eval(st); return r; }
 findup ★ function() { var m = "findup"; eval(st); return r; }
 findup2 ★ function() { var m = "findup2"; eval(st); return r; }
+
 getsearch ★ function() { var m = "getsearch"; eval(st); return r; }
 gosearchstarted ★ function() { var m = "gosearchstarted"; eval(st); return r; }
 setsearch ★ function() { var m = "setsearch"; eval(st); return r; }
@@ -13168,9 +13188,113 @@ getconfig ★ function() { var m = "getconfig"; eval(fsn); return r; }
 configcolor ★ function() { var m = "configcolor"; eval(st); return r; }
 getconfigcolor ★ function() { var m = "getconfigcolor"; eval(fn); return r; }
 saveconfig ★ function() { var m = "saveconfig"; eval(st); return r; }
-setconfigstate ★ function() { var m = "setconfigstate"; eval(st); return r; }
-setfiletype ★ function() { var m = "setfiletype"; eval(st); return r; }
-envchanged ★ function() { var m = "envchanged"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * saveconfig文は、ファイルタイプ別の設定を保存します。    
+ * 
+ * @filepath
+ * パラメータを指定しない場合、ファイルタイプ別の設定ダイアログで「OK」を押したのと同じです。    
+ * たとえ(一時的な設定)になっていたとしても、強制的に保存します。
+ * 
+ * パラメータに文字列を指定すると、指定した設定名として保存します。
+ * 現在の状態は何も変わりません。
+ *
+ * @param filepath 
+ * 
+ * 参照：
+ * @see setconfigstate
+ */
+declare function saveconfig(filepath?: string): number;
+
+/**
+ * s
+ * 
+ * setconfigstate文はファイルタイプ別の設定の状態を指定します。
+ * 
+ * @param config_flag
+ * 以下の値の論理和です。
+ * - ビット0   一時的な設定かどうか
+ *   - 0x0000 を指定すると一時的な設定ではなくなります。
+ *   - 0x0001 を指定すると一時的な設定になります。
+ * 
+ * 実行前に一時的な設定になっていて、0を指定すると、    
+ * 一時的な設定ではなくなりますが、他の秀丸エディタには反映されません。    
+ * 「ファイルタイプ別の設定」のダイアログボックスでOKを押すと、    
+ * 他の秀丸エディタにも反映されます。（同じファイルタイプであれば）
+ * 
+ * 参照：
+ * @see configstate
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setconfigstate(config_flag: number): number;
+
+/**
+ * s
+ * 
+ * setfiletypeは、ファイルタイプ別の設定を識別するための拡張子を設定します。    
+ * ファイルタイプ別の設定を識別するための拡張子は、filetypeキーワードで表され、    
+ * 実際のファイル名による拡張子とは別に設定ができます。
+ * 
+ * @param extension 
+ * 拡張子を指定します。    
+ * 拡張子は"."から始まっている必要があります。    
+ * "grep"や"exeresult"などの"."から始まらないファイルタイプは指定できません。
+ * 
+ * @param is_read_setting_file 
+ * 拡張子に対応するファイルタイプ別の設定を読み込んで適用するかどうかを指定します。    
+ * 省略するか0を指定すると設定を読み込んで適用します。    
+ * 1を指定すると、設定は読込まず現在の設定を維持したまま、filetypeだけが書き換わります。    
+ * 
+ * @example
+ * setfiletype(".mytxt", 1);
+ * 
+ * 参照：
+ * @see filetype
+ * @see configset
+ * 
+ * @returns
+ * 通常は１が返ってくるが、返ってくる値に意味はない。
+ */
+declare function setfiletype(extension: string, is_read_setting_file): number;
+
+/**
+ * s
+ * 
+ * envchanged文は、レジストリから動作環境とファイルタイプ別の設定の内容を再読込みし、秀丸エディタの動作環境とファイルタイプ別の設定を更新します。    
+ * 
+ * 秀丸エディタのマクロでは、[その他]-[動作環境]の内容を変更することができません。    
+ * しかし、この文を使うとそれと同様のことができるようになります。    
+ * 
+ * 動作環境やファイルタイプ別の設定の内容を変更したい場合は、    
+ * まずwriteregstr/writeregnum/writeregbinaryを使ってレジストリを書き換え、    
+ * 次にenvchangedを使って秀丸エディタにその内容を教えてあげてください。
+ * 
+ * レジストリの内容については独自に調べてください。    
+ * レジストリの内容を調べるには、Regedit.exeを使って、    
+ * 
+ * HKEY_CURRENT_USER\Software\Hidemaruo\Hidemaru     
+ * の内容を見てください。    
+ * 
+ * 「ファイルタイプ別の設定」に関しては、レジストリを書き換えなくても、    
+ * ファイルタイプ別の設定関連キーワード とconfig文 で使えるものがあります。    
+ * 
+ * config文で使えないものに関しては、envchangedで反映が可能です。    
+ * ただし、ファイルタイプ別の設定が一時的な設定になっている場合は、反映されません。    
+ * 一時的な設定かどうかはconfigstateで判断できます。
+ * 
+ * 参照：
+ * @see writeregstr
+ * @see writeregnum
+ * @see writeregbinary
+ * 
+ * @returns
+ * 返り値は意味を持ちません。
+ */
+declare function envchanged(): number;
 
 /**
  * s
