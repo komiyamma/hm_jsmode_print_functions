@@ -12775,15 +12775,221 @@ declare function sleep(millisecond: number): number;
 declare function setfloatmode(to_floatmode_on: number): number;
 
 
-
-
 seterrormode ★ function() { var m = "seterrormode"; eval(st); return r; }
 setbackgroundmode ★ function() { var m = "setbackgroundmode"; eval(st); return r; }
-inputpos ★ function() { var m = "inputpos"; eval(st); return r; }
-menu ★ function() { var m = "menu"; eval(st); return r; }
-mousemenu ★ function() { var m = "mousemenu"; eval(st); return r; }
-menuarray ★ function(ary, c) { var m = "menu"; eval(stary); return r; }
-mousemenuarray ★ function(ary, c) { var m = "mousemenu"; eval(stary); return r; }
+
+
+
+/**
+ * s
+ * 
+ * inputpos文は、ユーザからカーソル位置を入力してもらうための文です。    
+ * 
+ * この文を実行すると、ユーザはEnterキーを押すまでカーソルを自由に動かせるようになります。    
+ * EnterキーまたはEscキーを押すと、inputposは処理を終了します。    
+ * 
+ * inputpos実行中は、ウィンドウのキャプションに文字列を表示します。    
+ * ユーザがカーソル移動した後の位置は、キーワードxとyで参照することができます。    
+ * EnterキーでもEscキーでも、カーソル位置は変わります。
+ *  
+ * @param text 
+ * タイトルバー（キャプション）に表示させる文字列を指定します。
+ * 
+ * @example
+ * inputpos("位置を指定してください。");
+ * 
+ * @example
+ * var xOrg = x();
+ * var yOrg = y();
+ * var ret = inputpos("位置を指定してください。");
+ * var xNew = x();
+ * var yNew = y();
+ * message("x:"+ xNew + " y:" + yNew + " result:" + ret);
+ * if(ret == 0) {
+ *    moveto(xOrg, yOrg);
+ * }
+ *
+ * @returns
+ * Enterキーを押して終わった場合は、resultは0以外になります。    
+ * Escキーを押して終わった場合は、resultは0になります。    
+ */
+declare function inputpos(text: string): number;
+
+/**
+ * s
+ * 
+ * menu文はポップアップメニューを表示します。   
+ * 
+ * @param item1 
+ * @param optional_items 
+ * メニュー項目に表示される文字列を指定します。    
+ * 項目の数だけ複数指定できます。    
+ * 
+ * @example
+ * menu("項目A","項目B","項目C");
+ * 
+ * @example
+ * var selected = menu("項目A","項目B","項目C");
+ * if( selected == 0 ) {
+ *    ;
+ * } else if( selected == 1 ) {
+ *     message("Aが選ばれました。");
+ * } else if( selected == 2 ) {
+ *     message("Bが選ばれました。");
+ * } else if( selected == 3 ) {
+ *     message("Cが選ばれました。");
+ * }
+ * 
+ * @comment
+ * マウスカーソルの近くにメニューを表示するにはmousemenu文を使います。    
+ * 配列で指定する方式のmenuarray文もあります。    
+ * 
+ * @comment
+ * セパレータにする場合は、"\x01"という文字列を指定します。    
+ * 
+ * サブメニューにする場合は、"\x01"に続いてサブメニューのメニュー名を記述します。    
+ * その後の項目はサブメニュー内の項目として解釈されます。""を指定すると、サブメニューの終了を意味します。    
+ * 
+ * @example
+ * var selected = menu(
+ *   "\x01サブメニューA",
+ *   "項目A-1",
+ *   "項目A-2",
+ *   "",
+ *   "\x01サブメニューB",
+ *   "項目B-1",
+ *   "項目B-2",
+ *   "",
+ *   "項目C");
+ * 
+ * message(selected);
+ * 
+ * 参照：    
+ * @see mousemenu
+ * @see menuarray
+ * @see setmenudelay
+ * 
+ * @returns
+ * メニューを選択した場合、1から数えた項目の値になります。    
+ * 選択しなかった場合、0になります。    
+ */
+declare function menu(item1: string, ...optional_items: string[]): number;
+
+/**
+ * s
+ * 
+ * mousemenu文はポップアップメニューを表示します。    
+ * 引数等はmenuと同じです。    
+ * メニューの表示位置がマウスカーソルの近くになります。    
+ * 
+ * @param item1 
+ * @param optional_items 
+ * メニュー項目に表示される文字列を指定します。    
+ * 項目の数だけ複数指定できます。    
+ * 
+ * @example
+ * mousemenu("項目A","項目B","項目C");
+ * 
+ * @example
+ * var selected = mousemenu("項目A","項目B","項目C");
+ * if( selected == 0 ) {
+ *    ;
+ * } else if( selected == 1 ) {
+ *     message("Aが選ばれました。");
+ * } else if( selected == 2 ) {
+ *     message("Bが選ばれました。");
+ * } else if( selected == 3 ) {
+ *     message("Cが選ばれました。");
+ * }
+ * 
+ * 参照：    
+ * @see menu
+ * @see setmenudelay
+ * 
+ * @returns
+ * メニューを選択した場合、1から数えた項目の値になります。    
+ * 選択しなかった場合、0になります。    
+ */
+declare function mousemenu(item1: string, ...optional_items: string[]): number;
+
+/**
+ * s
+ * 
+ * menuarray文は、ポップアップメニューを表示します。    
+ * 機能はmenu文と同じで、引数を配列で指定する方式の文です。    
+ * 文字カーソルの近くにメニューを表示します。
+ * 
+ * @param menu_items 
+ * 配列形式で、メニュー内容を指定します。
+ * 
+ * @example
+ * var arr =  [ "\x01サブメニューA",
+ *   "項目A-1",
+ *   "項目A-2",
+ *   "",
+ *   "\x01サブメニューB",
+ *   "項目B-1",
+ *   "項目B-2",
+ *   "",
+ *   "項目C"];
+ * 
+ * var selected = menuarray(arr);
+ * message(selected);}
+ * 
+ * @param menu_len
+ * 指定の数値のメニューの個数まで、メニュー項目を表示するという、どこまで表示するかを指定することが出来ます。    
+ * 省略した場合は、全てのメニュー項目を表示します。    
+ * 
+ * 参照：
+ * @see menu
+ * @see mousemenuarray
+ * @see setmenudelay
+ * 
+ * @returns
+ * メニューを選択した場合、1から数えた項目の値になります。    
+ * 選択しなかった場合、0になります。    
+ */
+declare function menuarray(menu_items: string[], menu_len?: number): number;
+
+/**
+ * s
+ * 
+ * mousemenuarray文は、ポップアップメニューを表示します。    
+ * 引数等はmenuarrayと同じです。     
+ * メニューの表示位置がマウスカーソルの近くになります。    
+ * 
+ * @param menu_items 
+ * 配列形式で、メニュー内容を指定します。
+ * 
+ * @example
+ * var arr =  [ "\x01サブメニューA",
+ *   "項目A-1",
+ *   "項目A-2",
+ *   "",
+ *   "\x01サブメニューB",
+ *   "項目B-1",
+ *   "項目B-2",
+ *   "",
+ *   "項目C"];
+ * 
+ * var selected = menuarray(arr);
+ * message(selected);}
+ * 
+ * @param menu_len
+ * 指定の数値のメニューの個数まで、メニュー項目を表示するという、どこまで表示するかを指定することが出来ます。    
+ * 省略した場合は、全てのメニュー項目を表示します。    
+ * 
+ * 参照：
+ * @see menu
+ * @see mousemenuarray
+ * @see setmenudelay
+ * 
+ * @returns
+ * メニューを選択した場合、1から数えた項目の値になります。    
+ * 選択しなかった場合、0になります。    
+ */
+declare function mousemenuarray(menu_items: string[], menu_len?: number): number;
+
 setmenudelay ★ function() { var m = "setmenudelay"; eval(st); return r; }
 input ★ function() { var m = "input"; eval(fs); return r; }
 inputchar ★ function() { var m = "inputchar"; eval(fn); return r; }
