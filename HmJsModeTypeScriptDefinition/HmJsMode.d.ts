@@ -13131,7 +13131,61 @@ setconfigstate ★ function() { var m = "setconfigstate"; eval(st); return r; }
 setfiletype ★ function() { var m = "setfiletype"; eval(st); return r; }
 envchanged ★ function() { var m = "envchanged"; eval(st); return r; }
 loadkeyassign ★ function() { var m = "loadkeyassign"; eval(st); return r; }
-savekeyassign ★ function() { var m = "savekeyassign"; eval(st); return r; }
+
+/**
+ * s
+ * 
+ * loadkeyassign文は、キー割り当てファイルを読込みます。    
+ * パラメータでキー割り当てファイルの名前を指定してください。    
+ * 
+ * @param filepath 
+ * 
+ * @example
+ * loadkeyassign("default.key");
+ * 
+ * @param is_settingdir
+ * 1 を指定すると、設定ファイル用のフォルダを対象とします。   
+ * 指定しない場合、秀丸エディタをインストールしたフォルダが対象となります。
+ * 
+ * 参照：
+ * @see savekeyassign
+ * 
+ * @returns
+ * 読み込みに成功した場合、１を返す。    
+ * 読み込みに失敗した場合は、マクロが中断してしまうため注意。
+ */
+declare function loadkeyassign(filepath: string, is_settingdir?: number): number;
+
+/**
+ * s
+ * 
+ * savekeyassign文は、現在のキー割り当てをキー割り当てファイルとしてファイルに保存します。    
+ * パラメータでキー割り当てファイルの名前を指定してください。    
+ * 
+ * @param filepath 
+ * 
+ * @param n_target
+ * 0か1かの数字を指定します。    
+ * 0にすると、キー割り当てのみの保存、    
+ * 1にすると、マクロ登録の内容も保存します。    
+ * 省略すると0になります。    
+ * 
+ * @param is_settingdir
+ * 1 を指定すると、設定ファイル用のフォルダを対象とします。   
+ * 指定しない場合、秀丸エディタをインストールしたフォルダが対象となります。
+ * 
+ * @example
+ * savekeyassign("temp.key", 0, 1);
+ * 
+ * 参照：
+ * @see loadkeyassign
+ * 
+ * @returns
+ * 保存に成功した場合、１を返す。    
+ * 保存に失敗した場合は、０を返す。
+ */
+declare function savekeyassign(filepath: string, n_target?:number, is_settingdir?: number): number;
+
 loadhilight ★ function() { var m = "loadhilight"; eval(st); return r; }
 savehilight ★ function() { var m = "savehilight"; eval(st); return r; }
 
