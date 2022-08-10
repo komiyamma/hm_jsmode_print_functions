@@ -13130,7 +13130,6 @@ saveconfig ★ function() { var m = "saveconfig"; eval(st); return r; }
 setconfigstate ★ function() { var m = "setconfigstate"; eval(st); return r; }
 setfiletype ★ function() { var m = "setfiletype"; eval(st); return r; }
 envchanged ★ function() { var m = "envchanged"; eval(st); return r; }
-loadkeyassign ★ function() { var m = "loadkeyassign"; eval(st); return r; }
 
 /**
  * s
