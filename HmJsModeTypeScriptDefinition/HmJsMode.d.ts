@@ -12990,8 +12990,115 @@ declare function menuarray(menu_items: string[], menu_len?: number): number;
  */
 declare function mousemenuarray(menu_items: string[], menu_len?: number): number;
 
-setmenudelay ★ function() { var m = "setmenudelay"; eval(st); return r; }
-input ★ function() { var m = "input"; eval(fs); return r; }
+/**
+ * s
+ * 
+ * setmenudelay文は、menu, menuarray文の遅延時間を指定します。
+ * 
+ * @param millisecond 
+ * 遅延時間をミリ秒単位で指定します。
+ * 
+ * @example
+ * setmenudelay(1000);
+ * 
+ * @comment
+ * menu, menuarray文を実行する直前に指定し、menu, menuarray文が実行されたら遅延時間はゼロにリセットされます。    
+ * マクロを実行開始したときもゼロで、setmenudelayで指定したままマクロが終了しても、記憶されることはありません。    
+ * 
+ * 遅延時間の間は、メニューは現れず、キー操作のみが可能で、メニューを表示しないまま選択が可能です。    
+ * キー操作が無いまま、遅延時間が経過するとメニューが現れます。    
+ * 
+ * @example
+ * setmenudelay(1000);
+ * menu("項目1(&A)");
+ * 
+ * 参考：
+ * @see menu
+ * @see menuarray
+ * 
+ * @returns
+ * 返ってくる値に意味はない。
+ */
+declare function setmenudelay(millisecond: number): number;
+
+/**
+ * s
+ * 
+ * ダイアログボックスに表示されるメッセージを指定します。
+ * 
+ * @param message_text
+ * ダイアログボックスに表示されるメッセージを指定します。
+ * 
+ * @param message_default
+ * 入力欄にあらかじめ入力されている内容を指定します。
+ * 
+ * @param input_dialog_type
+ * ダイアログを出す位置の決め方と、入力欄の種類を指定します。
+ * ダイアログを出す位置と入力欄の種類は以下の値を指定することができます。
+ * - 0x00　通常（省略と同じ）
+ * - 0x01　画面中央
+ * - 0x02　画面左上からの位置
+ * - 0x03　画面右上からの位置
+ * - 0x04　画面左下からの位置
+ * - 0x05　画面右下からの位置
+ * - 0x06　カーソル位置
+ * - 0x11　ウィンドウ中央
+ * - 0x12　ウィンドウ左上からの位置
+ * - 0x13　ウィンドウ右上からの位置
+ * - 0x14　ウィンドウ左下からの位置
+ * - 0x15　ウィンドウ右下からの位置
+ * 
+ * さらに以下の値を論理和で指定できます。    
+ * - 0x0100　複数行の入力ボックス
+ * - 0x0200　複数行の入力ボックスのとき折り返しあり
+ * 
+ * @param input_pos_x
+ * 位置を指定している場合のX座標を指定します。
+ * 
+ * @param input_pos_y
+ * 位置を指定している場合のY座標を指定します。
+ * 
+ * input_dialog_typeで左上/右上/左下/右下からの位置を指定しているときに、input_pos_x、input_pos_yのX,Y座標が使われます。    
+ * X,Y座標の値は、DPIが100%のときのピクセル単位で、DPIが200%のときは指定の2倍の値のピクセル数になります。    
+ * 
+ * @example
+ * var a = input( "入力してください", "", 0x01 ); //画面の中央
+ * var a = input( "入力してください", "", 0x15, 100, 50 ); //ウィンドウ右下からの位置
+ * 
+ * @comment
+ * 複数行の場合、改行コードは\r\nの２文字（\x0D\x0Aと同じ）で表す必要があります。    
+ * gettext等で本文から取得されたテキストは、通常\r\nになっていますが、直接文字列で表す場合は、\r\nと書く必要があります。    
+ * 
+ * @example
+ * var a = input( "入力してください", "あ\r\nい\r\nう", 0x0300 );    //複数行
+ * 
+ * @comment
+ * TSV/CSVモードのセル内改行のテキストなど、場面に応じて改行コードが変わる場合は、文字列の置換をする必要がある場合があります。    
+ * 置換をするには、strreplace関数でできます。    
+ * 
+ * @example
+ * var s = "あ\nい\nう\nえ\nお";
+ * var s = strreplace(s,"\n","\r\n");
+ * var s = input( "Test", s, 0x0100 );
+ * var s = strreplace(s,"\r\n","\n");
+ * 
+ * @example
+ * var a = input("aaa", "bbb");
+ * var r = result();
+ * if (r == 1) {
+ *     message("OKを押しました");
+ * } else if (r == 0) {
+ *     message("キャンセルを押しました");
+ * }
+ * 
+ * @returns
+ * 入力された文字列を返します。    
+ * 返り値以外にも、result()にも選択ボタンの状況を反映します。    
+ * 「OK」を押したならinput実行直後、result()は1になります。    
+ * 「キャンセル」を押したなら、input実行直後は、result()は0になります。
+ */
+declare function input(message_text: string, message_default?: string, input_prop?: number, input_pos_x?: number, input_pos_y?: number ): number;
+
 inputchar ★ function() { var m = "inputchar"; eval(fn); return r; }
 iskeydown ★ function() { var m = "iskeydown"; eval(fn); return r; }
 getininum ★ function() { var m = "getininum"; eval(fn); return r; }
